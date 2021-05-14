@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>TestGrpc.Client.Nuget</id>
+        <version>1.0.0</version>
+        <description>Test gRPC .NET 472 client</description>
+        <authors>THaT team</authors>
+		<dependencies>
+		  <group targetFramework=".NETFramework4.7.2">
+			  <!-- <dependency id="Google.Protobuf" version="3.17.0" /> -->
+			  <!-- <dependency id="Grpc" version="2.37.1" /> -->
+			  <!-- <dependency id="Grpc.Net.Client" version="2.37.0" /> -->
+		  </group>		  
+		</dependencies>
+    </metadata>
+	<files>
+		<file src="..\TestGrpc.Client.Nuget\bin\Release\*.dll" target="lib\net472" exclude="..\TestGrpc.Client.Nuget\bin\release\*grpc_csharp_ext.x*.*" />
+	</files>
+</package>
