@@ -24,6 +24,16 @@ namespace TestGrpc.Server
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
+                    webBuilder.ConfigureKestrel(kestrelOptions =>
+                    {
+                        kestrelOptions.ListenLocalhost(5011);
+
+                        kestrelOptions.ListenLocalhost(5012, listenOptions =>
+                        {
+                            listenOptions.UseHttps(CertificateReader.GetCertificate());
+                        });
+                    });
                 });
     }
 }
