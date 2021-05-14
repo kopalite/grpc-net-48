@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Work\\Samples\\grpc-net-48\\Server\\TestGrpc.Server\\TestGrpc.Server.csproj": {}
+  },
+  "projects": {
+    "C:\\Work\\Samples\\grpc-net-48\\Server\\TestGrpc.Server\\TestGrpc.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Work\\Samples\\grpc-net-48\\Server\\TestGrpc.Server\\TestGrpc.Server.csproj",
+        "projectName": "TestGrpc.Server",
+        "projectPath": "C:\\Work\\Samples\\grpc-net-48\\Server\\TestGrpc.Server\\TestGrpc.Server.csproj",
+        "packagesPath": "C:\\Users\\UIVKOP\\.nuget\\packages\\",
+        "outputPath": "C:\\Work\\Samples\\grpc-net-48\\Server\\TestGrpc.Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\UIVKOP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://vanlanschot.pkgs.visualstudio.com/KCM/_packaging/THaT/nuget/v3/index.json": {},
+          "https://vanlanschot.pkgs.visualstudio.com/_packaging/GITSD/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Grpc.AspNetCore": {
+              "target": "Package",
+              "version": "[2.34.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
