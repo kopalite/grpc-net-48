@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TestGrpc.Client.NuGet
 {
@@ -11,22 +8,21 @@ namespace TestGrpc.Client.NuGet
     {
         private string _certificatePem;
 
-        public string GetCertPem()
+        internal string GetCertificatePem(string certificateName)
         {
             if (_certificatePem == null)
             {
                 var result = new StringBuilder(Environment.NewLine);
-                var certName = "localhost";
                 string certData = null;
 
                 using (var store = new X509Store(StoreLocation.LocalMachine))
                 {
                     store.Open(OpenFlags.ReadOnly);
 
-                    var matches = store.Certificates.Find(X509FindType.FindByIssuerName, certName, true);
+                    var matches = store.Certificates.Find(X509FindType.FindByIssuerName, certificateName, true);
                     if (matches.Count != 1)
                     {
-                        throw new Exception($"Could not conclusively find the certificate {certName}");
+                        throw new Exception($"Could not conclusively find the certificate {certificateName}");
                     }
                     var bytes = matches[0].Export(X509ContentType.Cert);
                     certData = Convert.ToBase64String(bytes);

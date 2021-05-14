@@ -13,7 +13,7 @@ namespace TestGrpc.Server
             var certName = "localhost";
             using var store = new X509Store(StoreLocation.LocalMachine);
             store.Open(OpenFlags.ReadOnly);
-            var matches = store.Certificates.Find(X509FindType.FindByIssuerName, certName, true);
+            var matches = store.Certificates.Find(X509FindType.FindBySubjectName, certName, true);
             if (matches.Count != 1)
             {
                 throw new Exception($"Could not conclusively find the certificate {certName}");
