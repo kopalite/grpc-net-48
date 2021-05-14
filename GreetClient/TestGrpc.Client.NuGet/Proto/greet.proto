@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "TestGrpc.Client.Lib";
+option csharp_namespace = "TestGrpc.Client.NuGet";
 
 package greet;
 

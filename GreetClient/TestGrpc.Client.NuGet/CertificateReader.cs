@@ -5,12 +5,13 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestGrpc.Client.Lib
+namespace TestGrpc.Client.NuGet
 {
     public class CertificateReader
     {
         private string _certificatePem;
-        private string GetCertPem()
+
+        public string GetCertPem()
         {
             if (_certificatePem == null)
             {

@@ -1,14 +1,4 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using TestGrpc;
-using static TestGrpc.Client.Greeter;
+﻿using System.Threading.Tasks;
 
 namespace TestGrpc.Client
 {
@@ -16,7 +6,7 @@ namespace TestGrpc.Client
     {
         static async Task Main(string[] args)
         {
-           
+            await Task.CompletedTask;
         }
 
         

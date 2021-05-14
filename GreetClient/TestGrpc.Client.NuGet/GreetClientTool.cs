@@ -1,16 +1,9 @@
 ﻿using Grpc.Core;
-using Grpc.Net.Client;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
-using TestGrpc;
-using static TestGrpc.Client.Lib.Greeter;
+using static TestGrpc.Client.NuGet.Greeter;
 
-namespace TestGrpc.Client.Lib
+namespace TestGrpc.Client.NuGet
 {
     public class GreetClientTool
     {
@@ -25,14 +18,13 @@ namespace TestGrpc.Client.Lib
 
         public async Task GreetSecureAsync()
         {
-            var credentials = new SslCredentials(GetCertPem());
-            channel = new Channel("localhost", 5012, credentials);
-            client = new GreeterClient(channel);
-            reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
+            var certPem = new CertificateReader().GetCertPem();
+            var credentials = new SslCredentials(certPem);
+            var channel = new Channel("localhost", 5012, credentials);
+            var client = new GreeterClient(channel);
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
             Console.WriteLine("Greeting: " + reply.Message);
             Console.WriteLine("Press any key to exit...");
         }
     }
-
-    
 }
