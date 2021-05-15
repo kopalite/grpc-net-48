@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
+using TestGrpc.Server.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using TestGrpc.Server.Certificates;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace TestGrpc.Server
 {
@@ -25,14 +26,14 @@ namespace TestGrpc.Server
                 {
                     webBuilder.UseStartup<Startup>();
 
-                    webBuilder.ConfigureKestrel(kestrelOptions =>
+                    webBuilder.ConfigureKestrel(ko =>
                     {
-                        kestrelOptions.ListenLocalhost(5011);
+                        ko.ConfigureEndpointDefaults(lo => lo.Protocols = HttpProtocols.Http2);
 
-                        kestrelOptions.ListenLocalhost(5012, listenOptions =>
-                        {
-                            listenOptions.UseHttps(CertificateReader.GetCertificate());
-                        });
+                        var config = ko.ApplicationServices.GetService<IOptions<GreetServerConfig>>();
+                        ko.ListenLocalhost(config.Value.InsecurePort);
+                        ko.ListenLocalhost(config.Value.SecurePort, 
+                                    lo => lo.UseHttps(CertificateReader.GetCertificate(config.Value.CertSubjectName)));
                     });
                 });
     }

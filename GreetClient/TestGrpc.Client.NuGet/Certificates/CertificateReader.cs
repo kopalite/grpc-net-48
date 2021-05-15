@@ -2,7 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace TestGrpc.Client.NuGet
+namespace TestGrpc.Client.NuGet.Certificates
 {
     public class CertificateReader
     {

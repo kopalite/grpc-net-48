@@ -2,27 +2,29 @@
 using System.Collections.Generic;
 using System.Configuration;
 
-namespace TestGrpc.Client.NuGet
+namespace TestGrpc.Client.NuGet.Configuration
 {
-    internal class ConfigReader
+    internal class GreetClientConfig
     {
-        public string InsecureAddress { get; private set; }
-        public int InsecurePort { get; private set; }
-        public string SecureAddress { get; private set; }
-        public int SecurePort { get; private set; }
-        public string CertSubjectName { get; internal set; }
+        private string _address;
+        public string Address => _address ?? (_address = GetString(nameof(Address)));
 
-        public ConfigReader()
-        {
-            InsecureAddress = GetString(nameof(InsecureAddress));
-            InsecurePort = GetInt(nameof(InsecurePort));
-            SecureAddress = GetString(nameof(SecureAddress));
-            SecurePort = GetInt(nameof(SecurePort));
-            CertSubjectName = GetString(nameof(CertSubjectName));
-        }
+
+        private int _insecurePort;
+        public int InsecurePort => _insecurePort == 0 ? (_insecurePort = GetInt(nameof(InsecurePort))) : _insecurePort;
+
+
+        private int _securePort;
+        public int SecurePort => _securePort == 0 ? (_securePort = GetInt(nameof(SecurePort))) : _securePort;
+
+
+        private string _certSubjectName;
+        public string CertSubjectName => _certSubjectName ?? (_certSubjectName = GetString(nameof(CertSubjectName)));
+
 
         private string GetString(string key)
         {
+
             var value = ConfigurationManager.AppSettings[key];
             if (string.IsNullOrWhiteSpace(value))
             {

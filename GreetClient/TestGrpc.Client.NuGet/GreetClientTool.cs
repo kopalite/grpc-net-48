@@ -1,19 +1,21 @@
 ﻿using Grpc.Core;
 using System;
 using System.Threading.Tasks;
+using TestGrpc.Client.NuGet.Certificates;
+using TestGrpc.Client.NuGet.Configuration;
 using static TestGrpc.Client.NuGet.Greeter;
 
 namespace TestGrpc.Client.NuGet
 {
     public class GreetClientTool
     {
-        private static readonly ConfigReader Config = new ConfigReader();
+        private static readonly GreetClientConfig Config = new GreetClientConfig();
 
         public async Task GreetPlainAsync()
-        {
-            var channel = new Channel(Config.InsecureAddress, Config.InsecurePort, ChannelCredentials.Insecure);
+        {   
+            var channel = new Channel(Config.Address, Config.InsecurePort, ChannelCredentials.Insecure);
             var client = new GreeterClient(channel);
-            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient insecure request" });
             Console.WriteLine("Greeting: " + reply.Message);
         }
 
@@ -21,9 +23,9 @@ namespace TestGrpc.Client.NuGet
         {
             var certPem = new CertificateReader().GetCertificatePem(Config.CertSubjectName);
             var credentials = new SslCredentials(certPem);
-            var channel = new Channel(Config.SecureAddress, Config.SecurePort, credentials);
+            var channel = new Channel(Config.Address, Config.SecurePort, credentials);
             var client = new GreeterClient(channel);
-            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient secure request" });
             Console.WriteLine("Greeting: " + reply.Message);
         }
     }
