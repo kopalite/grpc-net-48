@@ -21,7 +21,7 @@ namespace TestGrpc.Client.NuGet
 
         public async Task GreetSecureAsync()
         {
-            var certPem = new CertificateReader().GetCertificatePem(Config.CertSubjectName);
+            var certPem = new CertificateReader().GetCertificatePem(Config.StoreLocation.GetValueOrDefault(), Config.CertSubjectName);
             var credentials = new SslCredentials(certPem);
             var channel = new Channel(Config.Address, Config.SecurePort, credentials);
             var client = new GreeterClient(channel);

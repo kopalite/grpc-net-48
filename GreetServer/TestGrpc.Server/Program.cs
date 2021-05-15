@@ -33,7 +33,7 @@ namespace TestGrpc.Server
                         var config = ko.ApplicationServices.GetService<IOptions<GreetServerConfig>>();
                         ko.ListenLocalhost(config.Value.InsecurePort);
                         ko.ListenLocalhost(config.Value.SecurePort, 
-                                    lo => lo.UseHttps(CertificateReader.GetCertificate(config.Value.CertSubjectName)));
+                                    lo => lo.UseHttps(CertificateReader.GetCertificate(config.Value.StoreLocation, config.Value.CertSubjectName)));
                     });
                 });
     }

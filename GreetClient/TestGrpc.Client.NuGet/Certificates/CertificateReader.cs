@@ -8,21 +8,21 @@ namespace TestGrpc.Client.NuGet.Certificates
     {
         private string _certificatePem;
 
-        internal string GetCertificatePem(string certificateName)
+        internal string GetCertificatePem(StoreLocation storeLocation, string certSubjectName)
         {
             if (_certificatePem == null)
             {
                 var result = new StringBuilder(Environment.NewLine);
                 string certData = null;
 
-                using (var store = new X509Store(StoreLocation.LocalMachine))
+                using (var store = new X509Store(storeLocation))
                 {
                     store.Open(OpenFlags.ReadOnly);
 
-                    var matches = store.Certificates.Find(X509FindType.FindByIssuerName, certificateName, true);
+                    var matches = store.Certificates.Find(X509FindType.FindBySubjectName, certSubjectName, true);
                     if (matches.Count != 1)
                     {
-                        throw new Exception($"Could not conclusively find the certificate {certificateName}");
+                        throw new Exception($"Could not conclusively find the certificate {certSubjectName}");
                     }
                     var bytes = matches[0].Export(X509ContentType.Cert);
                     certData = Convert.ToBase64String(bytes);
@@ -41,4 +41,5 @@ namespace TestGrpc.Client.NuGet.Certificates
             return _certificatePem;
         }
     }
+
 }

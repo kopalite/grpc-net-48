@@ -7,9 +7,9 @@ namespace TestGrpc.Server.Certificates
 {
     internal class CertificateReader
     {
-        public static X509Certificate2 GetCertificate(string certSubjectName)
+        public static X509Certificate2 GetCertificate(StoreLocation storeLocation, string certSubjectName)
         {    
-            using var store = new X509Store(StoreLocation.LocalMachine);
+            using var store = new X509Store(storeLocation);
             store.Open(OpenFlags.ReadOnly);
             var matches = store.Certificates.Find(X509FindType.FindBySubjectName, certSubjectName, true);
             if (matches.Count != 1)

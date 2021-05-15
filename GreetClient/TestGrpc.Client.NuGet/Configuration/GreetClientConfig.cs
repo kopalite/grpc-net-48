@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TestGrpc.Client.NuGet.Configuration
 {
@@ -17,6 +18,9 @@ namespace TestGrpc.Client.NuGet.Configuration
         private int _securePort;
         public int SecurePort => _securePort == 0 ? (_securePort = GetInt(nameof(SecurePort))) : _securePort;
 
+
+        private StoreLocation? _storeLocation;
+        public StoreLocation? StoreLocation => _storeLocation ?? (_storeLocation = GetEnum<StoreLocation>(nameof(StoreLocation)));
 
         private string _certSubjectName;
         public string CertSubjectName => _certSubjectName ?? (_certSubjectName = GetString(nameof(CertSubjectName)));
@@ -41,6 +45,16 @@ namespace TestGrpc.Client.NuGet.Configuration
                 throw new Exception($"Configuration AppSettings Int32 value not found for the key '{key}'");
             }
             return value;
+        }
+
+        private TEnum GetEnum<TEnum>(string key) where TEnum : struct
+        {
+            var strValue = ConfigurationManager.AppSettings[key];
+            if (string.IsNullOrWhiteSpace(strValue) || !Enum.TryParse(strValue, out TEnum enumValue))
+            {
+                throw new Exception($"Configuration AppSettings Int32 value not found for the key '{key}'");
+            }
+            return enumValue;
         }
     }
 }
