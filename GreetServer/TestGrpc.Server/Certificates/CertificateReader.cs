@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using TestGrpc.Server.Configuration;
 
