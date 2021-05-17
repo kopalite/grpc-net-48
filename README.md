@@ -111,7 +111,7 @@ Problems and lessons learned:
 required nuget packages are Grpc, Grpc.Tools, Grpc.Net.Client and Google.Protobuf,
 but sometimes, installation of Grpc or Grpc.Tools hangs.
 
-	- solution: not conclusive solution, but helps most of the times:
+  - solution: not conclusive solution, but helps most of the times:
 	  a) Clean the folder ~\AppData\Local\NuGet
 	  b) in VS, remove all NuGet package sources, except default one https://api.nuget.org/v3/index.json
 	  c) try to install concerning package
@@ -121,7 +121,7 @@ but sometimes, installation of Grpc or Grpc.Tools hangs.
 .proto files are not markable in Properties window for protobuf compilation correctly, 
 so gRPC stub code is not generated. 
 
-	- solution: protoc.exe compiler comes out with Grpc.Tools nuget. Installing nuget and restarting VS usually helps
+   - solution: protoc.exe compiler comes out with Grpc.Tools nuget. Installing nuget and restarting VS usually helps
 
 .net standard 2.0 helps with .proto files being compiled, but combined with 4.7.2 assemblies and gRPC,
  introduces a lot of issues with unresolved collisions between referenced package/dll-s versions.
@@ -130,4 +130,4 @@ so gRPC stub code is not generated.
    
 error: Google.Protobuf.Tools proto compilation is only supported by default in a C# project (extension .csproj) 
 
-	- uninstal/install google.protobuf nuget and error should be gone
+   - uninstal/install google.protobuf nuget and error should be gone
